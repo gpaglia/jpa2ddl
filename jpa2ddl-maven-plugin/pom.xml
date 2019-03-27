@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.devskiller.jpa2ddl</groupId>
         <artifactId>jpa2ddl-parent</artifactId>
-        <version>0.9.12-gp</version>
+        <version>0.9.13-gp</version>
     </parent>
 
     <artifactId>jpa2ddl-maven-plugin</artifactId>
@@ -77,7 +77,7 @@
             <plugin>
                 <groupId>io.takari.maven.plugins</groupId>
                 <artifactId>takari-lifecycle-plugin</artifactId>
-                <version>1.13.6</version>
+                <version>1.13.4</version>
                 <extensions>true</extensions>
                 <configuration>
                     <proc>none</proc>
