@@ -14,6 +14,12 @@ project.version = findProperty('jpa2ddlVersion') ?: '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// gpaglia
+compileJava {
+	options.compilerArgs += ['-Xlint:deprecation']
+}
+
+
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
@@ -45,5 +51,5 @@ artifacts {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.2.1'
+	gradleVersion = '4.8.1'
 }

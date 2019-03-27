@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.devskiller.jpa2ddl</groupId>
         <artifactId>jpa2ddl-parent</artifactId>
-        <version>0.9.12-SNAPSHOT</version>
+        <version>0.9.12-gp</version>
     </parent>
 
     <artifactId>jpa2ddl-gradle-plugin</artifactId>
@@ -17,6 +17,7 @@
 
     <properties>
         <script.prefix>./</script.prefix>
+        <script.suffix></script.suffix>
     </properties>
 
     <dependencies>
@@ -53,7 +54,7 @@
                         <id>gradle</id>
                         <phase>package</phase>
                         <configuration>
-                            <executable>${script.prefix}gradlew</executable>
+                            <executable>${script.prefix}gradlew${script.suffix}</executable>
                             <arguments>
                                 <argument>clean</argument>
                                 <argument>build</argument>
@@ -116,6 +117,7 @@
             </activation>
             <properties>
                 <script.prefix />
+                <script.suffix>.bat</script.suffix>
             </properties>
         </profile>
     </profiles>

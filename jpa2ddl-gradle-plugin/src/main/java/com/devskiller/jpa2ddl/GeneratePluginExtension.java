@@ -4,29 +4,31 @@ import java.io.File;
 import java.util.Properties;
 
 import org.gradle.api.Project;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 
 public class GeneratePluginExtension {
 
-	private final PropertyState<File> outputPath;
-	private final PropertyState<GenerationMode> generationMode;
-	private final PropertyState<String[]> packages;
-	private final PropertyState<Action> action;
-	private final PropertyState<Properties> jpaProperties;
-	private final PropertyState<Boolean> formatOutput;
-	private final PropertyState<Boolean> skipSequences;
-	private final PropertyState<String> delimiter;
+	private final Property<File> outputPath;
+	private final Property<GenerationMode> generationMode;
+	private final Property<String[]> packages;
+	private final Property<Action> action;
+	private final Property<Properties> jpaProperties;
+	private final Property<Boolean> formatOutput;
+	private final Property<Boolean> skipSequences;
+	private final Property<String> delimiter;
 
 	public GeneratePluginExtension(Project project) {
-		outputPath = project.property(File.class);
-		generationMode = project.property(GenerationMode.class);
-		packages = project.property(String[].class);
-		action = project.property(Action.class);
-		jpaProperties = project.property(Properties.class);
-		formatOutput = project.property(Boolean.class);
-		skipSequences = project.property(Boolean.class);
-		delimiter = project.property(String.class);
+		ObjectFactory of = project.getObjects();
+		outputPath = of.property(File.class);
+		generationMode = of.property(GenerationMode.class);
+		packages = of.property(String[].class);
+		action = of.property(Action.class);
+		jpaProperties = of.property(Properties.class);
+		formatOutput = of.property(Boolean.class);
+		skipSequences = of.property(Boolean.class);
+		delimiter = of.property(String.class);
 	}
 
 	public File getOutputPath() {

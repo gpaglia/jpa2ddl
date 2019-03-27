@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.devskiller.jpa2ddl</groupId>
         <artifactId>jpa2ddl-parent</artifactId>
-        <version>0.9.12-SNAPSHOT</version>
+        <version>0.9.12-gp</version>
     </parent>
 
     <artifactId>jpa2ddl-core</artifactId>
@@ -24,6 +24,13 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.196</version>
+        </dependency>
+        
+        <!-- gianni@gpaglia.com for java 10 compat -->
+        <dependency>
+        	<groupId>javax.xml.bind</groupId>
+        	<artifactId>jaxb-api</artifactId>
+        	<version>2.4.0-b180725.0427</version>
         </dependency>
 
         <!-- test dependencies -->
