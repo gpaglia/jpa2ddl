@@ -14,10 +14,11 @@
     <description>jpa2ddl Maven Plugin</description>
 
     <packaging>takari-maven-plugin</packaging>
-    <!-- <packaging>jar</packaging> -->
-
 
     <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
         <mavenVersion>3.6.0</mavenVersion>
         <mavenPluginVersion>3.6.0</mavenPluginVersion>
         <it-project.version>2.9.2</it-project.version>
@@ -50,7 +51,6 @@
         </dependency>
 
         <!-- test dependencies -->
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -87,8 +87,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <verbose>false</verbose>
-                    <source>${maven.compiler.release}</source>
-                    <target>${maven.compiler.release}</target>
                     <proc>none</proc>
                 </configuration>
             </plugin>

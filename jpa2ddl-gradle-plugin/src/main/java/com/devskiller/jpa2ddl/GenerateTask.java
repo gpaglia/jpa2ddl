@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import org.gradle.api.DefaultTask;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 public class GenerateTask extends DefaultTask {
@@ -40,6 +41,7 @@ public class GenerateTask extends DefaultTask {
 		getLogger().info("Schema saved to " + extension.getOutputPath());
 	}
 
+  @Input
 	GeneratorSettings getSettings() {
 		return new GeneratorSettings(extension.getGenerationMode(),
 				extension.getOutputPath(),

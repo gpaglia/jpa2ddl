@@ -1,7 +1,17 @@
 plugins {
 	id 'groovy'
 	id 'java-gradle-plugin'
+	id 'maven-publish'
 }
+
+/* 
+if (JavaVersion.current() != project.targetCompatibility) {
+    throw new GradleException("The java version used ${JavaVersion.current()} is not the expected version ${project.targetCompatibility}.")
+}
+
+print "Java home: ${System.getenv('org.gradle.java.home')}\n"
+
+*/
 
 repositories {
 	mavenLocal()
@@ -11,14 +21,25 @@ repositories {
 group = 'com.devskiller.jpa2ddl'
 project.version = findProperty('jpa2ddlVersion') ?: '1.0.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 // gpaglia
+
+gradlePlugin {
+    plugins {
+        jpa2ddl {
+            id = 'com.devskiller.jpa2ddl'
+            implementationClass = 'com.devskiller.jpa2ddl.GeneratePlugin'
+        }
+    }
+}
+
 compileJava {
 	options.compilerArgs += ['-Xlint:deprecation']
 }
 
+// end gpaglia
 
 dependencies {
 	compile gradleApi()
@@ -26,16 +47,16 @@ dependencies {
 	compile "com.devskiller.jpa2ddl:jpa2ddl-core:${findProperty('jpa2ddlVersion') ?: '+'}"
 	testCompile gradleTestKit()
 	testCompile 'junit:junit:4.12'
-	testCompile 'org.assertj:assertj-core:3.8.0'
+	testCompile 'org.assertj:assertj-core:3.12.2'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
+	archiveClassifier = 'sources'
 	from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
+	archiveClassifier = 'javadoc'
 	from javadoc.destinationDir
 }
 
@@ -50,6 +71,8 @@ artifacts {
 	archives groovydocJar
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '4.8.1'
+publishing {
+    repositories {
+        mavenLocal()
+    }
 }

@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.devskiller.jpa2ddl</groupId>
         <artifactId>jpa2ddl-samples</artifactId>
-        <version>0.9.13-SNAPSHOT</version>
+        <version>0.9.13-gp</version>
     </parent>
 
     <artifactId>jpa2ddl-flyway-maven-sample</artifactId>
@@ -14,11 +14,11 @@
     <description>jpa2ddl flyway with maven sample</description>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javaee-api-version>7.0</javaee-api-version>
-        <hibernate-version>5.2.15.Final</hibernate-version>
+        <hibernate-version>5.4.2.Final</hibernate-version>
 
         <migrations-dir>${basedir}/src/main/resources/migrations/</migrations-dir>
         <db-file>${basedir}/src/main/resources/db/flyway</db-file>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.197</version>
+            <version>1.4.199</version>
         </dependency>
     </dependencies>
 
@@ -71,7 +71,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>5.0.7</version>
+                <version>5.2.4</version>
                 <configuration>
                     <driver>org.h2.Driver</driver>
                     <url>jdbc:h2:file:${db-file}</url>
