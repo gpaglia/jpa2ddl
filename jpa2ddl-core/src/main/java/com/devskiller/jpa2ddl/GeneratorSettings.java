@@ -16,7 +16,7 @@ class GeneratorSettings {
 	private final boolean skipSequences;
 
 	GeneratorSettings(GenerationMode generationMode, File outputPath, List<String> packages, Action action,
-	                  Properties jpaProperties, boolean formatOutput, String delimiter, boolean skipSequences) {
+      Properties jpaProperties, boolean formatOutput, String delimiter, boolean skipSequences) {
 		this.generationMode = generationMode;
 		this.outputPath = outputPath;
 		this.packages = packages;

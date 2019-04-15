@@ -1,10 +1,12 @@
 package com.devskiller.jpa2ddl;
 
 import java.io.File;
+import java.util.Map;
 import java.util.Properties;
 
 import org.gradle.api.Project;
 import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 
@@ -14,7 +16,7 @@ public class GeneratePluginExtension {
 	private final Property<GenerationMode> generationMode;
 	private final Property<String[]> packages;
 	private final Property<Action> action;
-	private final Property<Properties> jpaProperties;
+	private final MapProperty<String, String> jpaProperties;
 	private final Property<Boolean> formatOutput;
 	private final Property<Boolean> skipSequences;
 	private final Property<String> delimiter;
@@ -25,7 +27,7 @@ public class GeneratePluginExtension {
 		generationMode = of.property(GenerationMode.class);
 		packages = of.property(String[].class);
 		action = of.property(Action.class);
-		jpaProperties = of.property(Properties.class);
+		jpaProperties = of.mapProperty(String.class, String.class);
 		formatOutput = of.property(Boolean.class);
 		skipSequences = of.property(Boolean.class);
 		delimiter = of.property(String.class);
@@ -63,11 +65,11 @@ public class GeneratePluginExtension {
 		this.action.set(action);
 	}
 
-	public Properties getJpaProperties() {
+	public Map<String, String> getJpaProperties() {
 		return jpaProperties.get();
 	}
 
-	public void setJpaProperties(Properties jpaProperties) {
+	public void setJpaProperties(Map<String, String> jpaProperties) {
 		this.jpaProperties.set(jpaProperties);
 	}
 
@@ -111,7 +113,7 @@ public class GeneratePluginExtension {
 		return action;
 	}
 
-	public Provider<Properties> getJpaPropertiesProvider() {
+	public Provider<Map<String, String>> getJpaPropertiesProvider() {
 		return jpaProperties;
 	}
 

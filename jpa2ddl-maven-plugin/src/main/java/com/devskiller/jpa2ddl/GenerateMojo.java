@@ -110,7 +110,15 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		GeneratorSettings settings = new GeneratorSettings(
-				generationMode, outputPath, packages, action, jpaProperties, formatOutput, delimiter, skipSequences);
+        generationMode, 
+        outputPath, 
+        packages, 
+        action, 
+        jpaProperties, 
+        formatOutput, 
+        delimiter, 
+        skipSequences
+    );
 		try {
 			schemaGenerator.generate(settings);
 			getLog().info("Schema saved to " + outputPath);

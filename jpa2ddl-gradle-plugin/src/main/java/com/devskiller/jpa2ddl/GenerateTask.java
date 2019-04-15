@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.Set;
 
 import org.gradle.api.DefaultTask;
@@ -43,11 +44,13 @@ public class GenerateTask extends DefaultTask {
 
   @Input
 	GeneratorSettings getSettings() {
+    Properties jpap = new Properties();
+    jpap.putAll(extension.getJpaProperties());
 		return new GeneratorSettings(extension.getGenerationMode(),
 				extension.getOutputPath(),
 				Arrays.asList(extension.getPackages()),
 				extension.getAction(),
-				extension.getJpaProperties(),
+				jpap,
 				extension.getFormatOutput(),
 				extension.getDelimiter(),
 				extension.getSkipSequences());
