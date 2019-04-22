@@ -25,10 +25,10 @@ public abstract class EngineDecorator {
 		return new NoOpDecorator();
 
 	}
-
-	public String decorateConnectionString(String connectionString) {
-		return connectionString;
-	}
+  
+  public String decorateConnectionString(String connectionString, String init) {
+    return connectionString + (init != null ? ";INIT=" + init : "");
+  }
 
 	public void decorateDatabaseInitialization(Connection connection) throws IOException, SQLException {
 	}

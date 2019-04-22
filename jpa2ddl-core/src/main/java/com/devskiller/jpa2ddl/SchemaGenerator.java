@@ -22,6 +22,10 @@ class SchemaGenerator {
 	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String HIBERNATE_SCHEMA_FILTER_PROVIDER = "hibernate.hbm2ddl.schema_filter_provider";
 
+  // GP added
+  private static final String HIBERNATE_DEFAULT_SCHEMA = "hibernate.default_schema";
+  // End GP Added
+
 	void generate(GeneratorSettings settings) throws Exception {
 		validateSettings(settings);
 
@@ -38,8 +42,15 @@ class SchemaGenerator {
 		EngineDecorator engineDecorator = EngineDecorator.getEngineDecorator(settings.getJpaProperties().getProperty(HIBERNATE_DIALECT));
 
 		if (settings.getGenerationMode() == GenerationMode.DATABASE) {
+      // GP Added
+      String schema = settings.getJpaProperties().getProperty(HIBERNATE_DEFAULT_SCHEMA);
+      String init = null;
+      if (schema != null) {
+        init = "CREATE SCHEMA IF NOT EXISTS " + schema;
+      }
+      // End GP Added
 
-			String dbUrl = engineDecorator.decorateConnectionString(DB_URL);
+			String dbUrl = engineDecorator.decorateConnectionString(DB_URL, init);
 
 			if (settings.getAction() == Action.UPDATE) {
 				outputFile = FileResolver.resolveNextMigrationFile(settings.getOutputPath());
@@ -78,9 +89,19 @@ class SchemaGenerator {
 			export.setOutputFile(outputFile.getAbsolutePath());
 			export.execute(EnumSet.of(TargetType.SCRIPT), settings.getAction().toSchemaExportAction(), metadata.buildMetadata());
 		} else {
+      // GP Added
+      String schema = settings.getJpaProperties().getProperty(HIBERNATE_DEFAULT_SCHEMA);
+      String init = "";
+      if (schema != null) {
+        init = ";INIT=CREATE SCHEMA IF NOT EXISTS " + schema;
+      }
+
+      String dbUrl = DB_URL + init;
+      // End GP Added
+
 			Connection connection = null;
 			if (settings.getAction() == Action.UPDATE) {
-				connection = DriverManager.getConnection(DB_URL, "SA", "");
+				connection = DriverManager.getConnection(dbUrl, "SA", "");
 
 				engineDecorator.decorateDatabaseInitialization(connection);
 

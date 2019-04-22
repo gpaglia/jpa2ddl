@@ -9,8 +9,13 @@ import org.h2.util.Utils;
 class PostgreSQLDecorator extends EngineDecorator {
 
 	@Override
-	public String decorateConnectionString(String connectionString) {
-		return connectionString + ";MODE=PostgreSQL;INIT=set search_path to pg_catalog,public;";
+	public String decorateConnectionString(String connectionString, String init) {
+		return super.decorateConnectionString(
+        connectionString 
+          + ";MODE=PostgreSQL;INIT=set search_path to pg_catalog,public"
+          + (init != null ? "\\;" + init : ""),
+        null
+    );
 	}
 
 	@Override

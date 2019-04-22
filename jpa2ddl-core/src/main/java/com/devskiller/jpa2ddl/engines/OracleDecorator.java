@@ -9,8 +9,8 @@ class OracleDecorator extends EngineDecorator {
 	private static final String EMPTY_SYNONYMS = "CREATE TABLE ALL_SYNONYMS (SYNONYM_NAME VARCHAR2(30), TABLE_OWNER VARCHAR2(30), TABLE_NAME VARCHAR2(30));";
 
 	@Override
-	public String decorateConnectionString(String connectionString) {
-		return connectionString + ";MODE=Oracle";
+	public String decorateConnectionString(String connectionString, String init) {
+		return super.decorateConnectionString(connectionString + ";MODE=Oracle", init);
 	}
 
 	@Override

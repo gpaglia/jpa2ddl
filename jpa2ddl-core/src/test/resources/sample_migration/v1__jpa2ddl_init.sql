@@ -1,4 +1,4 @@
-CREATE SCHEMA prod;
+CREATE SCHEMA if not exists prod;
 
 create table prod.User (
   id bigint not null,

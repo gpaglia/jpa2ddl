@@ -26,6 +26,13 @@
             <artifactId>jpa2ddl-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.199</version>
+        </dependency>
+        -->
     </dependencies>
 
     <build>

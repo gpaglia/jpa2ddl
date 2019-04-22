@@ -3,7 +3,6 @@ package com.devskiller.jpa2ddl;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 
 import org.gradle.api.Plugin;

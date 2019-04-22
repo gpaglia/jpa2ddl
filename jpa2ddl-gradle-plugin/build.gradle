@@ -1,6 +1,7 @@
 plugins {
 	id 'groovy'
 	id 'java-gradle-plugin'
+	id 'java-library'
 	id 'maven-publish'
 }
 
@@ -42,12 +43,13 @@ compileJava {
 // end gpaglia
 
 dependencies {
-	compile gradleApi()
-	compile localGroovy()
-	compile "com.devskiller.jpa2ddl:jpa2ddl-core:${findProperty('jpa2ddlVersion') ?: '+'}"
-	testCompile gradleTestKit()
-	testCompile 'junit:junit:4.12'
-	testCompile 'org.assertj:assertj-core:3.12.2'
+	implementation gradleApi()
+	implementation localGroovy()
+	api "com.devskiller.jpa2ddl:jpa2ddl-core:${findProperty('jpa2ddlVersion') ?: '+'}"
+	api "com.h2database:h2:1.4.199"
+	testImplementation gradleTestKit()
+	testImplementation 'junit:junit:4.12'
+	testImplementation 'org.assertj:assertj-core:3.12.2'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -61,7 +63,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 task groovydocJar(type: Jar, dependsOn: groovydoc) {
-	classifier = 'groovydoc'
+	archiveClassifier = 'groovydoc'
 	from groovydoc.destinationDir
 }
 
@@ -74,5 +76,14 @@ artifacts {
 publishing {
     repositories {
         mavenLocal()
+    }
+
+	publications {
+        pluginPublication (MavenPublication) {
+            from    components.java
+            groupId    project.group
+            artifactId    'com.devskiller.jpa2ddl.gradle.plugin'
+            version    project.version
+        }
     }
 }
